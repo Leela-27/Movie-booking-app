@@ -59,18 +59,14 @@ Start the server
 I deploy this project clientside(front-end) in vercel and the serverside(back-end) in the render.com . I provide the links in below
 
 ```bash
-  front-end: 
+  front-end: https://frontend-lf6802gcs-leela-27s-projects.vercel.app/
 
-  back-end: 
+  back-end: https://movie-booking-app-1.onrender.com/
 ```
-<<<<<<< HEAD
 
 
 ## Demo
 
 Here is the Demo
 
-https://github.com/Leela-369/almaBetter-bookMyShow/assets/117467628/c20f1171-2d8f-4787-8e71-250f7df87092
-
-=======
->>>>>>> 0ec95c70370dc9deb77df0944e2771b690b08f7e
+https://frontend-lf6802gcs-leela-27s-projects.vercel.app/
