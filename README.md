@@ -63,6 +63,7 @@ I deploy this project clientside(front-end) in vercel and the serverside(back-en
 
   back-end: 
 ```
+<<<<<<< HEAD
 
 
 ## Demo
@@ -71,3 +72,5 @@ Here is the Demo
 
 https://github.com/Leela-369/almaBetter-bookMyShow/assets/117467628/c20f1171-2d8f-4787-8e71-250f7df87092
 
+=======
+>>>>>>> 0ec95c70370dc9deb77df0944e2771b690b08f7e
