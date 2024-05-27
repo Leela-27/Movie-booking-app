@@ -65,8 +65,6 @@ I deploy this project clientside(front-end) in vercel and the serverside(back-en
 ```
 
 
-## Demo
+## Deployed Website
 
-Here is the Demo
-
-https://frontend-lf6802gcs-leela-27s-projects.vercel.app/
+[wesite](https://frontend-lf6802gcs-leela-27s-projects.vercel.app)
