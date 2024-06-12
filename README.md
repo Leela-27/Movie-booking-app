@@ -61,7 +61,7 @@ I deploy this project clientside(front-end) in vercel and the serverside(back-en
 ```bash
   front-end: (https://frontend-kq1noe9xy-leela-27s-projects.vercel.app/)
 
-  back-end: https://movie-booking-app-1.onrender.com/
+  back-end: https://movie-booking-app-wavz.onrender.com/
 ```
 
 
