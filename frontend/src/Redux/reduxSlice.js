@@ -59,6 +59,7 @@ export const {
 
 export const fetchLastBookingData = () => async (dispatch) => {
   const BASE_URL = process.env.REACT_APP_BASE_URL || 'https://movie-booking-app-1.onrender.com';
+  // 
   try {
     dispatch(setIsLoading(true));  // Show loader
     const response = await axios.get(`${BASE_URL}/api/last`);

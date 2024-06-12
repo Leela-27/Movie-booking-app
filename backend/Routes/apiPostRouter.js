@@ -3,7 +3,7 @@ const express = require('express');
 // Create a new router instance
 const router = express.Router();
 // Import the Booking model from the '../Models/booking' path
-const Booking = require('../Models/booking');
+const Booking = require('../Models/bookingSchema');
 
 // Define a route to create a new booking
 router.post('/bookings', async (req, res) => {

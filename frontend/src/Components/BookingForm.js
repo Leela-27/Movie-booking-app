@@ -3,17 +3,12 @@ import React, {useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Typography, Container, Box, Button } from '@mui/material';
 import { LastBookingDetails } from './LastBookingDetails';
-import { 
-  setSelectedMovie, 
-  setSelectedTimeSlot, 
-  setSelectedSeatTypes, 
-  setSeatNumbers, 
-  setShowMessage, 
-  fetchLastBookingData, 
-  bookNow 
-} from '../Redux/reduxSlice';
-import { MovieButton, TimeSlotButton, SeatTypeButton } from '../buttons/Buttons';
+import { MovieButtonComponent } from '../buttons/MovieButton';
+import { TimeSlotButtonsComponent } from '../buttons/TimeSlotButton';
+import { SeatButtonComponents } from '../buttons/SeatButton';
+import {   setShowMessage, bookNow } from '../Redux/reduxSlice';
 import { motion } from "framer-motion";
+
 
 export const BookingForm = () => {
   const dispatch = useDispatch();
@@ -27,41 +22,6 @@ export const BookingForm = () => {
     showMessage,
   } = useSelector((state) => state.booking);
 
-
-  const handleSelectMovie = useCallback(
-    (movie) => {
-      dispatch(setSelectedMovie(movie));
-    },
-    [dispatch]
-  );
-
-  const handleSelectTimeSlot = useCallback(
-    (timeSlot) => {
-      dispatch(setSelectedTimeSlot(timeSlot));
-    },
-    [dispatch]
-  );
-
-  const handleSelectSeatType = useCallback(
-    (seatType) => {
-      const updatedSeatTypes = [...selectedSeatTypes];
-      if (!updatedSeatTypes.includes(seatType)) {
-        updatedSeatTypes.push(seatType);
-      }
-      dispatch(setSelectedSeatTypes(updatedSeatTypes));
-    },
-    [dispatch, selectedSeatTypes]
-  );
-
-  const handleNumberChange = useCallback(
-    (seatType, event) => {
-      const updatedNumbers = { ...seatNumbers, [seatType]: parseInt(event.target.value) };
-      dispatch(setSeatNumbers(updatedNumbers));
-    },
-    [dispatch, seatNumbers]
-  );
-
-  
   const handleShowMessage = useCallback(
     () => {
       dispatch(setShowMessage(true));
@@ -94,10 +54,7 @@ export const BookingForm = () => {
       };
 
       dispatch(bookNow(bookingData))
-      .then(() => {
         handleShowMessage()
-        dispatch(fetchLastBookingData())
-      });
     },
     [dispatch, selectedMovie, selectedTimeSlot, selectedSeatTypes, seatNumbers, handleShowMessage]
   );
@@ -122,109 +79,19 @@ export const BookingForm = () => {
                 <Box>
                   <Typography variant='h6'>Select A Movie</Typography>
                 </Box>
-                <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-                  <MovieButton
-                    movieName='suraj par mangal bhari'
-                    isSelected={selectedMovie === 'suraj par mangal bhari'}
-                    onClick={() => handleSelectMovie('suraj par mangal bhari')}
-                  />
-                  <MovieButton
-                    movieName='Tenet'
-                    isSelected={selectedMovie === 'Tenet'}
-                    onClick={() => handleSelectMovie('Tenet')}
-                  />
-                  <MovieButton
-                    movieName='The war with grandpa'
-                    isSelected={selectedMovie === 'The war with grandpa'}
-                    onClick={() => handleSelectMovie('The war with grandpa')}
-                  />
-                  <MovieButton
-                    movieName="The personal history of David Copperfield"
-                    isSelected={selectedMovie === 'The personal history of David Copperfield'}
-                    onClick={() => handleSelectMovie('The personal history of David Copperfield')}
-                  />
-                  <MovieButton
-                    movieName="Come Play"
-                    isSelected={selectedMovie === 'Come Play'}
-                    onClick={() => handleSelectMovie('Come Play')}
-                  />
-                </Box>
+                <MovieButtonComponent/>
               </Box>
               <Box sx={{ border: 2, width: 'full', padding: 1, display: 'flex', flexDirection: 'column' }}>
                 <Box>
                   <Typography>Select A Time Slot</Typography>
                 </Box>
-                <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-                  <TimeSlotButton
-                    timeSlot='10:00 PM'
-                    isSelected={selectedTimeSlot === '10:00 PM'}
-                    onClick={() => handleSelectTimeSlot('10:00 PM')}
-                  />
-                  <TimeSlotButton
-                    timeSlot='01:00 PM'
-                    isSelected={selectedTimeSlot === '01:00 PM'}
-                    onClick={() => handleSelectTimeSlot('01:00 PM')}
-                  />
-                  <TimeSlotButton
-                    timeSlot='03:00 PM'
-                    isSelected={selectedTimeSlot === '03:00 PM'}
-                    onClick={() => handleSelectTimeSlot('03:00 PM')}
-                  />
-                  <TimeSlotButton
-                    timeSlot='08:00 PM'
-                    isSelected={selectedTimeSlot === '08:00 PM'}
-                    onClick={() => handleSelectTimeSlot('08:00 PM')}
-                  />
-                </Box>
+               <TimeSlotButtonsComponent/>
               </Box>
               <Box sx={{ border: 2, width: 'auto', padding: 1, display: 'flex', flexDirection: 'column' }}>
                 <Box>
                   <Typography>Select the Seats</Typography>
                 </Box>
-                <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-                  <SeatTypeButton
-                    seatType='Type A1'
-                    isSelected={selectedSeatTypes.includes('A1')}
-                    onClick={() => handleSelectSeatType('A1')}
-                    value={seatNumbers['A1'] || 0}
-                    onChange={(event) => handleNumberChange('A1', event)}
-                  />
-                  <SeatTypeButton
-                    seatType='Type A2'
-                    isSelected={selectedSeatTypes.includes('A2')}
-                    onClick={() => handleSelectSeatType('A2')}
-                    value={seatNumbers['A2'] || 0}
-                    onChange={(event) => handleNumberChange('A2', event)}
-                  />
-                  <SeatTypeButton
-                    seatType='Type A3'
-                    isSelected={selectedSeatTypes.includes('A3')}
-                    onClick={() => handleSelectSeatType('A3')}
-                    value={seatNumbers['A3'] || 0}
-                    onChange={(event) => handleNumberChange('A3', event)}
-                  />
-                  <SeatTypeButton
-                    seatType='Type A4'
-                    isSelected={selectedSeatTypes.includes('A4')}
-                    onClick={() => handleSelectSeatType('A4')}
-                    value={seatNumbers['A4'] || 0}
-                    onChange={(event) => handleNumberChange('A4', event)}
-                  />
-                  <SeatTypeButton
-                    seatType='Type D1'
-                    isSelected={selectedSeatTypes.includes('D1')}
-                    onClick={() => handleSelectSeatType('D1')}
-                    value={seatNumbers['D1'] || 0}
-                    onChange={(event) => handleNumberChange('D1', event)}
-                  />
-                  <SeatTypeButton
-                    seatType='Type D2'
-                    isSelected={selectedSeatTypes.includes('D2')}
-                    onClick={() => handleSelectSeatType('D2')}
-                    value={seatNumbers['D2'] || 0}
-                    onChange={(event) => handleNumberChange('D2', event)}
-                  />
-                </Box>
+               <SeatButtonComponents/>
               </Box>
               <Button
                 variant="contained"

@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography } from '@mui/material';
-import { fetchLastBookingData } from '../Redux/reduxSlice';  // Adjust the path as necessary
+import { fetchLastBookingData } from '../Redux/reduxSlice';
 
 export const LastBookingDetails = () => {
   const dispatch = useDispatch();
@@ -15,36 +15,48 @@ export const LastBookingDetails = () => {
   const lastBooking = useSelector((state) => state.booking.lastBooking);
   const isLoading = useSelector((state) => state.booking.isLoading);
 
+  // Memoize the rendering of the seat reservations list
+  const renderSeatReservations = useMemo(() => {
+    if (!lastBooking || !lastBooking.seatReservations) {
+      return null;
+    }
+
+    return (
+      <ul>
+        {lastBooking.seatReservations.map((seat) => (
+          <li key={seat.seatType}>
+            {seat.seatType}: {seat.number}
+          </li>
+        ))}
+      </ul>
+    );
+  }, [lastBooking]);
+
+  // Memoize the function to handle rendering the booking details or a message
+  const renderBookingDetails = useCallback(() => {
+    if (isLoading) {
+      return <Typography>Loading...</Typography>;
+    }
+
+    if (!lastBooking) {
+      return <Typography>No Previous Booking Yet</Typography>;
+    }
+
+    return (
+      <div>
+        <Typography>Last Booking Details:</Typography>
+        <Typography>Movie: {lastBooking.movie}</Typography>
+        <Typography>Time Slot: {lastBooking.timeSlot}</Typography>
+        <Typography>Seat Reservations:</Typography>
+        {renderSeatReservations}
+      </div>
+    );
+  }, [isLoading, lastBooking, renderSeatReservations]);
+
   return (
     <div>
       <Box sx={{ width: ['auto', 'auto', '12rem'], minHeight: '12rem', border: 2, padding: 3, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div>
-          {isLoading ? (
-            // Display a loader when data is being fetched
-            <Typography>Loading...</Typography>
-          ) : (
-            // Display the booking details or a message when there is no previous booking
-            lastBooking ? (
-              <div>
-                <Typography>Last Booking Details:</Typography>
-                <Typography>Movie: {lastBooking.movie}</Typography>
-                <Typography>Time Slot: {lastBooking.timeSlot}</Typography>
-                {/* Display seat reservations */}
-                <Typography>Seat Reservations:</Typography>
-                <ul>
-                  {/* Map through the seat reservations and display them */}
-                  {lastBooking.seatReservations?.map((seat) => (
-                    <li key={seat.seatType}>
-                      {seat.seatType}: {seat.number}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <Typography>No Previous Booking Yet</Typography>
-            )
-          )}
-        </div>
+        <div>{renderBookingDetails()}</div>
       </Box>
     </div>
   );
