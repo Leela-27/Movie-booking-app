@@ -59,7 +59,7 @@ Start the server
 I deploy this project clientside(front-end) in vercel and the serverside(back-end) in the render.com . I provide the links in below
 
 ```bash
-  front-end: https://frontend-lf6802gcs-leela-27s-projects.vercel.app/
+  front-end: (https://frontend-kq1noe9xy-leela-27s-projects.vercel.app/)
 
   back-end: https://movie-booking-app-1.onrender.com/
 ```
@@ -67,4 +67,4 @@ I deploy this project clientside(front-end) in vercel and the serverside(back-en
 
 ## Deployed Website
 
-[wesite](https://frontend-lf6802gcs-leela-27s-projects.vercel.app)
+[wesite](https://frontend-kq1noe9xy-leela-27s-projects.vercel.app/)
