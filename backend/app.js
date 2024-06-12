@@ -25,7 +25,10 @@ app.use(cors({
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+  
+},
+console.log('connected')
+);
 
 // Use the defined API routes for POST requests
 app.use('/api', apiPostRoutes);
