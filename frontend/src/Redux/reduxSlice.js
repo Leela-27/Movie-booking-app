@@ -58,7 +58,7 @@ export const {
 } = bookingSlice.actions;
 
 export const fetchLastBookingData = () => async (dispatch) => {
-  const BASE_URL = process.env.REACT_APP_BASE_URL || 'https://movie-booking-app-1.onrender.com';
+  const BASE_URL = process.env.REACT_APP_BASE_URL || 'https://movie-booking-app-wavz.onrender.com';
   // 
   try {
     dispatch(setIsLoading(true));  // Show loader
@@ -72,7 +72,7 @@ export const fetchLastBookingData = () => async (dispatch) => {
 };
 
 export const bookNow = (bookingData) => async (dispatch) => {
-  const BASE_URL = process.env.REACT_APP_BASE_URL || 'https://movie-booking-app-1.onrender.com';
+  const BASE_URL = process.env.REACT_APP_BASE_URL || 'https://movie-booking-app-wavz.onrender.com';
   try {
     const response = await axios.post(`${BASE_URL}/api/bookings`, bookingData);
     dispatch(fetchLastBookingData());
