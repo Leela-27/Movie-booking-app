@@ -1,15 +1,8 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, {  useMemo, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
-import { fetchLastBookingData } from '../Redux/reduxSlice';
 
 export const LastBookingDetails = () => {
-  const dispatch = useDispatch();
-
-  // Fetch the last booking details when the component mounts
-  useEffect(() => {
-    dispatch(fetchLastBookingData());
-  }, [dispatch]);
 
   // Get the last booking details and loading state from the Redux store
   const lastBooking = useSelector((state) => state.booking.lastBooking);
