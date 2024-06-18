@@ -52,19 +52,3 @@ Start the server
 ```bash
   npm run start
 ```
-
-
-## Deployment
-
-I deploy this project clientside(front-end) in vercel and the serverside(back-end) in the render.com . I provide the links in below
-
-```bash
-  front-end: (https://movie-booking-ho3q4o7p9-leela-27s-projects.vercel.app/)
-
-  back-end: (https://movie-booking-app-wavz.onrender.com)
-```
-
-
-## Deployed Website
-
-[wesite](https://movie-booking-ho3q4o7p9-leela-27s-projects.vercel.app/)
