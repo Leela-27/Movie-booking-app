@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { BookingForm } from "./Components/BookingForm";
-import { fetchLastBookingData } from "./Redux/reduxSlice";
+import { getLastBookingDetails } from "./Redux/reduxSlice";
 import { useEffect } from "react";
 
 
@@ -9,7 +9,7 @@ function App() {
 const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchLastBookingData())
+    dispatch(getLastBookingDetails())
   },[dispatch])
   return (
     <div>

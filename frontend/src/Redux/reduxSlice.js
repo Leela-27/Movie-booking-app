@@ -1,6 +1,6 @@
 // src/redux/bookingSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import * as api from '../api'
 
 const initialState = {
   selectedMovie: '',
@@ -57,12 +57,10 @@ export const {
   resetBookingState,
 } = bookingSlice.actions;
 
-export const fetchLastBookingData = () => async (dispatch) => {
-  const BASE_URL = process.env.REACT_APP_BASE_URL || 'https://movie-booking-app-wavz.onrender.com';
-  // 
+export const getLastBookingDetails = () => async (dispatch) => {
   try {
     dispatch(setIsLoading(true));  // Show loader
-    const response = await axios.get(`${BASE_URL}/api/last`);
+    const response = await api.fetchLastBookingDetails();
     dispatch(setLastBooking(response.data));
   } catch (error) {
     console.error('Error fetching last booking:', error);
@@ -72,10 +70,10 @@ export const fetchLastBookingData = () => async (dispatch) => {
 };
 
 export const bookNow = (bookingData) => async (dispatch) => {
-  const BASE_URL = process.env.REACT_APP_BASE_URL || 'https://movie-booking-app-wavz.onrender.com';
+ 
   try {
-    const response = await axios.post(`${BASE_URL}/api/bookings`, bookingData);
-    dispatch(fetchLastBookingData());
+    const response = await api.sendingBookingDetails(bookingData);
+    dispatch(getLastBookingDetails());
     console.log('Backend response:', response.data);
     dispatch(resetBookingState());
     dispatch(setShowMessage(true));
